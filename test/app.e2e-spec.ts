@@ -4,6 +4,7 @@ import * as pactum from 'pactum'
 import { AppModule } from '../src/app.module';
 import { PrismaService } from '../src/prisma/prisma.service';
 import { AuthDto } from '../src/auth/dto';
+import { EditUserDto } from '../src/user/dto';
 
 describe('App e2e', () => {
   let app: INestApplication;
@@ -101,14 +102,27 @@ describe('App e2e', () => {
         }).expectStatus(200)
       })
     });
-    describe('Edit User', () => { });
+
+    describe('Edit User', () => {
+      it('Should edit user', () => {
+        const dto: EditUserDto = {
+          firstName: 'Nico',
+          email: 'editeduser@example.com'
+        };
+
+        return pactum.spec().patch('users',).withHeaders({
+          Authorization: 'Bearer $S{userAt}',
+        }).withBody(dto).expectStatus(200)
+      })
+    });
   });
-  describe('Bookmark', () => {
-    describe('Create bookmark', () => { });
-    describe('Get bookmark', () => { });
-    describe('Get bookmark by id', () => { });
-    describe('Edit bookmark by id', () => { });
-    describe('Delete bookmark by id', () => { });
-  });
-})
+});
+
+// describe('Bookmark', () => {
+//   describe('Create bookmark', () => { });
+//   describe('Get bookmark', () => { });
+//   describe('Get bookmark by id', () => { });
+//   describe('Edit bookmark by id', () => { });
+//   describe('Delete bookmark by id', () => { });
+// });
 
