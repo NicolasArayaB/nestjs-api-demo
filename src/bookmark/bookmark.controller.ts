@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
 import { CreateBookmarkDto, EditBookmarkByIdDto } from './dto';
 import { BookmarkService } from './bookmark.service';
-import { GetUser } from '../../src/auth/decorator';
-import { JwtGuard } from '../../src/auth/guard';
+import { GetUser } from 'src/auth/decorator';
+import { JwtGuard } from 'src/auth/guard';
 
 @UseGuards(JwtGuard)
 @Controller('bookmarks')
